@@ -35,25 +35,25 @@ func New(t mime.Type, d string) *Content {
 	}
 }
 
-func Join(data []Content, sep string) (Content, error) {
+func Join(data []*Content, sep string) (*Content, error) {
 	if len(data) == 0 {
-		return Content{}, nil
+		return nil, nil
 	}
 	var res Content
 	for i, e := range data {
 		if i == 0 {
 			res.Type = e.Type
 		} else if e.Type != res.Type {
-			return Content{}, ErrIncompatibleFormats
+			return nil, ErrIncompatibleFormats
 		} else {
 			res.Data += sep
 		}
 		res.Data += e.Data
 	}
-	return res, nil
+	return &res, nil
 }
 
-func (d Content) Validate() error {
+func (d *Content) Validate() error {
 	if len(d.Data) > 0 && len(d.Type) < 1 { // if we have data but no type, oh, you better believe that's an error
 		return errContentTypeRequired
 	} else {
@@ -61,11 +61,14 @@ func (d Content) Validate() error {
 	}
 }
 
-func (d Content) IsZero() bool {
+func (d *Content) IsZero() bool {
 	return len(d.Data) == 0
 }
 
-func (d Content) String() string {
+func (d *Content) String() string {
+	if d == nil {
+		return "<nil>"
+	}
 	switch d.Type {
 	case mime.Text, mime.Markdown:
 		return d.Data
@@ -79,8 +82,8 @@ func (d Content) String() string {
 	}
 }
 
-func (d Content) MarshalColumn() ([]byte, error) {
-	if d.Type == "" && len(d.Data) < 1 {
+func (d *Content) MarshalColumn() ([]byte, error) {
+	if d == nil || d.Type == "" && len(d.Data) < 1 {
 		return []byte{}, nil
 	}
 	b := &strings.Builder{}
@@ -111,7 +114,7 @@ func (d *Content) UnmarshalColumn(text []byte) error {
 	return nil
 }
 
-func (d Content) Value() (driver.Value, error) {
+func (d *Content) Value() (driver.Value, error) {
 	data, err := d.MarshalColumn()
 	if err != nil {
 		return nil, err

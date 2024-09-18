@@ -10,12 +10,12 @@ import (
 
 func TestContent(t *testing.T) {
 	tests := []struct {
-		Content Content
+		Content *Content
 		Expect  []byte
 		Error   error
 	}{
 		{
-			Content{
+			&Content{
 				Type: "",
 				Data: "",
 			},
@@ -23,7 +23,7 @@ func TestContent(t *testing.T) {
 			nil,
 		},
 		{
-			Content{
+			&Content{
 				Type: "hello/there",
 				Data: "",
 			},
@@ -31,7 +31,7 @@ func TestContent(t *testing.T) {
 			nil,
 		},
 		{
-			Content{
+			&Content{
 				Type: "",
 				Data: "Cooltown okaysville",
 			},
@@ -39,7 +39,7 @@ func TestContent(t *testing.T) {
 			nil,
 		},
 		{
-			Content{
+			&Content{
 				Type: "hello/there;charset=utf-8",
 				Data: "",
 			},
@@ -47,7 +47,7 @@ func TestContent(t *testing.T) {
 			nil,
 		},
 		{
-			Content{
+			&Content{
 				Type: "hello/there",
 				Data: "Cooltown okaysville",
 			},
@@ -55,7 +55,7 @@ func TestContent(t *testing.T) {
 			nil,
 		},
 		{
-			Content{
+			&Content{
 				Type: "hello/there;charset=utf-8",
 				Data: "Cooltown okaysville",
 			},
@@ -63,7 +63,7 @@ func TestContent(t *testing.T) {
 			nil,
 		},
 		{
-			Content{
+			&Content{
 				Type: " hello / there; charset=utf-8 ",
 				Data: "Cooltown okaysville",
 			},
@@ -92,46 +92,46 @@ func TestContent(t *testing.T) {
 
 func TestJoinContent(t *testing.T) {
 	tests := []struct {
-		Data   []Content
+		Data   []*Content
 		Sep    string
-		Expect Content
+		Expect *Content
 		Error  func(error) error
 	}{
 		{
-			[]Content{
+			[]*Content{
 				{Type: "", Data: ""},
 			},
 			"",
-			Content{Type: "", Data: ""},
+			&Content{Type: "", Data: ""},
 			nil,
 		},
 		{
-			[]Content{
+			[]*Content{
 				{Type: "a", Data: "First"},
 				{Type: "a", Data: "Second"},
 			},
 			"/",
-			Content{Type: "a", Data: "First/Second"},
+			&Content{Type: "a", Data: "First/Second"},
 			nil,
 		},
 		{
-			[]Content{
+			[]*Content{
 				{Type: "a", Data: "First"},
 				{Type: "a", Data: "Second"},
 				{Type: "a", Data: "Third"},
 			},
 			"/",
-			Content{Type: "a", Data: "First/Second/Third"},
+			&Content{Type: "a", Data: "First/Second/Third"},
 			nil,
 		},
 		{
-			[]Content{
+			[]*Content{
 				{Type: "a", Data: "First"},
 				{Type: "b", Data: "Second"},
 				{Type: "a", Data: "Third"},
 			},
 			"/",
-			Content{},
+			&Content{},
 			func(err error) error {
 				if errors.Is(err, ErrIncompatibleFormats) {
 					return nil
