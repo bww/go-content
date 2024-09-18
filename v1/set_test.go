@@ -42,6 +42,7 @@ func TestSet(t *testing.T) {
 			Set: Set{
 				&Content{Type: mime.Text, Data: "Hello"},
 				&Content{Type: mime.Markdown, Data: "_Hello_"},
+				&Content{Type: mime.Markdown, Data: "_Hello, again_"}, // this is effectively unreachable
 			},
 			Choose: mime.Markdown,
 			Expect: &Content{Type: mime.Markdown, Data: "_Hello_"},
