@@ -3,7 +3,7 @@ module github.com/bww/go-content
 go 1.22.3
 
 require (
-	github.com/bww/go-mime v0.1.0
+	github.com/bww/go-mime v0.2.0
 	github.com/bww/go-util v1.34.1
 	github.com/microcosm-cc/bluemonday v1.0.27
 	github.com/russross/blackfriday/v2 v2.1.0

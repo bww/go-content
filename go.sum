@@ -2,6 +2,8 @@ github.com/aymerick/douceur v0.2.0 h1:Mv+mAeH1Q+n9Fr+oyamOlAkUNPWPlA8PPGR0QAaYuP
 github.com/aymerick/douceur v0.2.0/go.mod h1:wlT5vV2O3h55X9m7iVYN0TBM0NH/MmbLnd30/FjWUq4=
 github.com/bww/go-mime v0.1.0 h1:hzbNMQnHrz7h9PasyDR3X14YoNFEV1mRFCMUjV3EN/Y=
 github.com/bww/go-mime v0.1.0/go.mod h1:jqk/nnpBgIaQ2IRzN8bZeCjckI78tZwr5IV0looVYZw=
+github.com/bww/go-mime v0.2.0 h1:OwPo7VStzdkGw5h2xV3J7T60x67CssG8SoQR6VZ64tE=
+github.com/bww/go-mime v0.2.0/go.mod h1:jqk/nnpBgIaQ2IRzN8bZeCjckI78tZwr5IV0looVYZw=
 github.com/bww/go-util v1.34.1 h1:HpLfbgIYDrwLM9zGa4h/rxovOL1cuQxEkib30v8ox/Q=
 github.com/bww/go-util v1.34.1/go.mod h1:c418EBQ2i2EY5p+KVNSWn2F9HRGOpY9ctkp22pXD8es=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
