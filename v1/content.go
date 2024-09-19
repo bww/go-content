@@ -53,6 +53,13 @@ func Join(data []*Content, sep string) (*Content, error) {
 	return &res, nil
 }
 
+func (d *Content) WithType(t mime.Type) *Content {
+	return &Content{
+		Type: t,
+		Data: d.Data,
+	}
+}
+
 func (d *Content) Validate() error {
 	if len(d.Data) > 0 && len(d.Type) < 1 { // if we have data but no type, oh, you better believe that's an error
 		return errContentTypeRequired
