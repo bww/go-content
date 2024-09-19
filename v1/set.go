@@ -13,6 +13,9 @@ type Set []*Content
 // Choose finds the first content in the set that matches the first
 // acceptable mimetype. The acceptable types are provided in order of
 // preference as are the content elements.
+//
+// If no acceptable types are provided, the effect is that the first
+// element in the set is chosen, or if the set is empty, nil.
 func (s Set) Choose(accept ...mime.Type) *Content {
 	for _, e := range accept {
 		for _, c := range s {
