@@ -19,7 +19,8 @@ func Of(c *content.Content) *Text {
 	return (*Text)(c)
 }
 
-// Convert converts the provided content to an HTML representation, if possible.
+// Convert converts the provided content to a plain text representation, if
+// possible.
 func From(c *content.Content) (*content.Content, error) {
 	if c == nil {
 		return nil, nil
