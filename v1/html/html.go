@@ -1,6 +1,7 @@
 package html
 
 import (
+	"fmt"
 	"html"
 	"html/template"
 
@@ -12,7 +13,8 @@ import (
 // HTML is a view of Content as HTML
 type HTML content.Content
 
-// Of produces a view of the provided content as HTML
+// Of produces a view of the provided content as HTML. This does not convert the
+// content, it must already be of this type.
 func Of(c *content.Content) *HTML {
 	return (*HTML)(c)
 }
@@ -41,7 +43,7 @@ func From(c *content.Content) (*content.Content, error) {
 	case mime.Markdown:
 		return fromMarkdown(c)
 	default:
-		return nil, content.ErrIncompatibleFormats
+		return nil, fmt.Errorf("%w (%s -> %s)", content.ErrIncompatibleFormats, c.Type, mime.HTML)
 	}
 }
 
